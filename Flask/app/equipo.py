@@ -212,7 +212,7 @@ def add_equipo():
                     # Excepción: permitir si el equipo existente tiene incidencia con estado 'equipo cambiado'
                     cur.execute("""
                         SELECT 1 FROM incidencia
-                        WHERE idEquipo = %s AND estadoIncidencia = 'equipo cambiado'
+                        WHERE idEquipo = %s AND estadoIncidencia = 'equipo cambiado' 
                         """, (equipo_existente['idEquipo'],))
                     incidencia_cambiado = cur.fetchone()
                     if not incidencia_cambiado:

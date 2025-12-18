@@ -32,4 +32,4 @@ app.register_blueprint(cuentas)
 
 # se inicia la aplicacion, y confirma que __name__ sea la aplicacion main y no un modulo
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=3000)
+    app.run(debug=True, host='0.0.0.0', port=3300)
