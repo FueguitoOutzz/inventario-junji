@@ -6,9 +6,10 @@ import os
 import MySQLdb  # Importar para manejar errores específicos
 
 # Configuramos la conexión a la base de datos
-app.config['MYSQL_USER'] = os.getenv('MYSQL_USER') or cuentas['nombre_usuario']
-app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD') or cuentas['contrasenna']
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST') or 'localhost'  # localhost
+app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT', 3396))  # Puerto por defecto 3306
 app.config['MYSQL_DB'] = os.getenv('MYSQL_DB') or 'inventariofinal'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config['MYSQL_DATABASE_DEBUG'] = True  # Habilitar depuración para ver más detalles
