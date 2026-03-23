@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     function actualizarBotonesAcciones() {
         const seleccionados = $(".row-checkbox:checked");
-        const deleteButton = $(".delete-button");
+        const deleteButton = $(".delete-marca-btn");
         const editButton = $(".edit-button");
 
         if (seleccionados.length > 0) {
@@ -77,7 +77,7 @@ $(document).ready(function () {
     });
 
     // Manejar clic en el botón "Eliminar" para abrir el modal de confirmación o redirigir directamente
-    $(".delete-button").on("click", function () {
+    $(".delete-marca-btn").on("click", function () {
         if ($(this).prop("disabled")) return; // Evita la acción si está deshabilitado
 
         const deleteUrl = $(this).data("url");
@@ -90,10 +90,30 @@ $(document).ready(function () {
         // $("#confirm-delete-button").attr("href", deleteUrl);
         // $("#modal-delete-marca").modal("show");
 
-        // Si NO tienes modal de confirmación, usa confirm() nativo:
-        if (confirm("¿Estás seguro de que deseas eliminar las marcas seleccionadas? Esto eliminará también las relaciones asociadas")) {
-            window.location.href = deleteUrl;
-        }
+        // Modal genérico de Bootstrap
+        $("#confirmDeleteModal").modal("show");
+
+        // Accionar la eliminación desde el modal
+        $("#confirmDeleteBtn").off("click").on("click", function () {
+            $("#confirmDeleteModal").modal("hide");
+
+            $.ajax({
+                url: deleteUrl,
+                type: "POST",
+                success: function (response) {
+                    if (response.status === "success") {
+                        mostrarAlerta(response.message, "success");
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        mostrarAlerta(response.message, "danger");
+                    }
+                },
+                error: function (xhr) {
+                    let errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Error al eliminar marcas.";
+                    mostrarAlerta(errorMsg, "danger");
+                }
+            });
+        });
     });
 
     var buscador = document.getElementById("buscador");
@@ -103,3 +123,24 @@ $(document).ready(function () {
         });
     }
 });
+
+// Función para mostrar alertas dinámicas (Bootstrap)
+function mostrarAlerta(mensaje, tipo = "success") {
+    let alertContainer = document.getElementById("alertContainer");
+    if (!alertContainer) return;
+
+    alertContainer.className = `alert alert-${tipo} alert-dismissible fade show`;
+    alertContainer.innerHTML = `
+        ${mensaje}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    // Hacer scroll hacia arriba para que se vea la alerta
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Ocultar alerta automáticamente después de 4 segundos
+    setTimeout(() => {
+        alertContainer.classList.remove("show");
+        alertContainer.classList.add("d-none");
+    }, 4000);
+}

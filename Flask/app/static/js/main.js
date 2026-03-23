@@ -680,7 +680,12 @@ $(document).ready(function () {
     // Asignar la acción de redirección al botón de confirmación
     $("#genericModalConfirmButton").off("click").on("click", function () {
       if (confirmUrl) {
-        window.location.href = confirmUrl; // Redirigir a la URL
+        // Redirigir enviando por POST en lugar de GET directo
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = confirmUrl;
+        document.body.appendChild(form);
+        form.submit();
       }
       $("#genericModal").modal("hide");
     });
@@ -689,10 +694,11 @@ $(document).ready(function () {
   };
 
   // Asignar eventos a los botones de eliminar
-  $(".delete-button").on("click", function () {
+  $(".delete-button").on("click", function (event) {
+    event.preventDefault(); // Por si es una etiqueta <a> con href
     const title = $(this).data("title") || "Confirmar Acción";
     const message = $(this).data("message") || "¿Estás seguro de realizar esta acción?";
-    const confirmUrl = $(this).data("url");
+    const confirmUrl = $(this).data("url") || $(this).attr("href");
 
     configureGenericModal(title, message, confirmUrl);
   });

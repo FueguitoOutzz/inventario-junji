@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import Blueprint, render_template, request, url_for, redirect, flash, session
+from flask import Blueprint, render_template, request, url_for, redirect, flash, session, jsonify
 from db import mysql, bcrypt
 from cerberus import Validator
 
@@ -10,6 +10,9 @@ def loguear_requerido(f):
     def decorated_function(*args, **kargs):
         #print("DECORATOR 1")
         if "user" not in session:
+            # Si es una llamada AJAX o se espera JSON, devolvemos un JSON
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
+                return jsonify({"error": "No Autorizado"}), 401
             flash("Necesita estar logueado para acceder a esta ruta")
             return redirect("/ingresar")
         return f(*args, **kargs)
@@ -20,12 +23,19 @@ def administrador_requerido(f):
     @wraps(f)
     def decorated_function(*args, **kargs):
         if "user" not in session:
+            # Si es una llamada AJAX o se espera JSON
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
+                return jsonify({"error": "No Autorizado"}), 401
             flash("Necesita estar logueado para acceder a esta ruta")
             return redirect("/ingresar")
         
-        if session['privilegio'] == 1:
+        if session.get('privilegio') == 1:
             return f(*args, **kargs)
         
+        # Si no tiene el privilegio 1 y es AJAX
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
+            return jsonify({"error": "Privilegios insuficientes"}), 403
+            
         flash("Se nesesita ser administrador para usar esta funcion")
         return redirect("/ingresar")
     return decorated_function
@@ -89,7 +99,7 @@ def crear_cuenta():
         'nombreUsuario': {
             'required': True,
             'type': 'string',
-            'regex': '^[a-zA-Z0-9@.\s]+$'
+            'regex': r'^[a-zA-Z0-9@.\s]+$'
         },
         'contrasenna': {
             'required': True,
@@ -214,7 +224,7 @@ def update_usuario(nombreUsuario):
 
 
 
-@cuentas.route("/delete_usuario/<nombreUsuario>", methods=["GET", "POST"])
+@cuentas.route("/delete_usuario/<nombreUsuario>", methods=["POST"])
 @administrador_requerido
 def delete_usuario(nombreUsuario):
     cur = mysql.connection.cursor()

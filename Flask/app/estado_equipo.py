@@ -41,7 +41,7 @@ def estadoEquipo(page=1):
     return render_template(
         'Equipo/estado_equipo.html',
         estado_equipo=data,
-        unidades=unidades,  # 🔹 Pasamos las unidades al template
+        unidades=unidades,  # Pasamos las unidades al template
         page=page,
         lastpage=page < (total / perpage) + 1
     )
@@ -58,7 +58,7 @@ def add_estado_equipo():
             'nombre_estado_equipo': request.form['nombre_estado_equipo'],
             }
         schema = {
-            'nombre_estado_equipo': {'required': True, 'type': 'string', 'regex': '^[a-zA-Z0-9]+$'},
+            'nombre_estado_equipo': {'required': True, 'type': 'string', 'regex': r'^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$'},
         }
         fecha_modificacion = request.form['fecha_modificacion']
         v = Validator(schema)
@@ -78,7 +78,7 @@ def add_estado_equipo():
             return redirect(url_for('estado_equipo.estadoEquipo'))
     
 #eliminar    
-@estado_equipo.route('/delete_estado_equipo/<id>', methods = ['POST', 'GET'])
+@estado_equipo.route('/delete_estado_equipo/<id>', methods=['POST'])
 @administrador_requerido
 def delete_estado_equipo(id):
     if "user" not in session:
@@ -119,7 +119,7 @@ def mostrar_equipos_segun_tipo(tipo):
     equipos = cur.fetchall()
     cur.close()
 
-    # 🔹 Convertir resultados en formato JSON para la respuesta
+    # Convertir resultados en formato JSON para la respuesta
     equipos_json = [
         {
             "idEquipo": equipo["idEquipo"],

@@ -70,7 +70,11 @@ $(document).ready(function () {
         if (url) {
             // Puedes mostrar un confirm() si quieres doble confirmación
             if (confirm("¿Estás seguro de que deseas eliminar los tipos seleccionados? Esto afectará las relaciones asociadas.")) {
-                window.location.href = url;
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
+                document.body.appendChild(form);
+                form.submit();
             }
         }
     });

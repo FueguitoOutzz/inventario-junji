@@ -385,7 +385,7 @@ def update_asignacion(id):
 
 
 # eliminar
-@asignacion.route("/delete_asignacion/<id>", methods=["POST", "GET"])
+@asignacion.route("/delete_asignacion/<id>", methods=["POST"])
 @administrador_requerido
 def delete_asignacion(id):
     try:
@@ -821,7 +821,7 @@ def crear_pdf_devolucion(funcionario, equipos, id_devolucion, observacion=""):
         cols.ln()
         cols.write(unidad_funcionario)
         cols.ln()
-        cols.write(fecha_devolucion)  # ✅ Ahora ya no dará error
+        cols.write(fecha_devolucion)  # Ahora ya no dará error
 
     pdf.ln(20)
     TABLE_DATA = (

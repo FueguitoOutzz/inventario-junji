@@ -225,7 +225,7 @@ def add_incidencia():
 
     return redirect(url_for("incidencia.Incidencia"))
 
-@incidencia.route("/incidencia/delete_incidencia/<id>", methods=["GET", "POST"])
+@incidencia.route("/incidencia/delete_incidencia/<id>", methods=["POST"])
 @administrador_requerido
 def delete_incidencia(id):
     # Se asume que la validación de sesión se hace en el decorador @administrador_requerido.

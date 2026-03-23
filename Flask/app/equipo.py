@@ -444,7 +444,7 @@ def update_equipo(id):
 
 
 
-@equipo.route("/delete_equipo/<id>", methods=["POST", "GET"])
+@equipo.route("/delete_equipo/<id>", methods=["POST"])
 @administrador_requerido
 def delete_equipo(id):
     if "user" not in session:

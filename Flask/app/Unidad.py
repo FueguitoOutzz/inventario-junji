@@ -65,7 +65,7 @@ def add_Unidad():
         add_Unidad_schema = { #VALIDACION CADA DATO
             'codigoUnidad': {
                 'type': 'string',
-                'regex': '^[a-zA-Z0-9 ]+$'  # Permitir solo alfanuméricos y espacios
+                'regex': r'^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$'  # Permitir alfanuméricos, espacios y tildes
             },
             'nombreUnidad': {
                 'type': 'string',
@@ -78,7 +78,7 @@ def add_Unidad():
                 'minlength': 1,
                 'maxlength': 255,
                 'required': True,
-                'regex': '^[a-zA-Z0-9 ]+$'  # Permitir solo alfanuméricos y espacios
+                'regex': r'^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$'  # Permitir alfanuméricos, espacios y tildes
             },
             'direccionUnidad': {
                 'type': 'string',
@@ -158,14 +158,14 @@ def update_Unidad(id):
         update_Unidad_schema = {
             'codigo_Unidad': {
                 'type': 'string',
-                'regex': '^[a-zA-Z0-9 ]+$'  # Permitir solo alfanuméricos y espacios
+                'regex': r'^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$'  # Permitir alfanuméricos, espacios y tildes
             },
             'nombreUnidad': {
                 'type': 'string',  # Permitir solo alfanuméricos y espacios
             },
             'contactoUnidad': {
                 'type': 'string',
-                'regex': '^[a-zA-Z0-9 ]+$', # Permitir solo alfanuméricos y espacios
+                'regex': r'^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$', # Permitir alfanuméricos, espacios y tildes
             },
             'direccionUnidad': {
                 'type': 'string',  # Permitir solo alfanuméricos y espacios
@@ -207,7 +207,7 @@ def update_Unidad(id):
             return redirect(url_for('Unidad.UNIDAD'))
 
 #Elimina un registro segun el id
-@Unidad.route('/delete_Unidad/<id>', methods = ['POST', 'GET'])
+@Unidad.route('/delete_Unidad/<id>', methods=['POST'])
 @administrador_requerido
 def delete_Unidad(id):
     try:

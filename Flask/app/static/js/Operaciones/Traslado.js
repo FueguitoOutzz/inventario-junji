@@ -49,7 +49,7 @@ document.getElementById("trasladoForm").addEventListener("submit", function (eve
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                mostrarAlerta("✅ Traslado creado correctamente.", "success");
+                mostrarAlerta("Traslado creado correctamente.", "success");
 
                 // Cerrar modal y resetear formulario
                 $('#trasladoModal').modal('hide');
@@ -81,7 +81,7 @@ function cargarDetallesTraslado(id) {
     let trasSeleccionado = traslados.find(t => t.idTraslado == id);
 
     if (trasSeleccionado) {
-        // ✅ Usar la nueva función corregida
+        // Usar la nueva función corregida
         document.getElementById("detalleFecha").textContent = formatearFecha(trasSeleccionado.fechatraslado);
         document.getElementById("detalleOrigen").textContent = trasSeleccionado.nombreOrigen;
         document.getElementById("detalleDestino").textContent = trasSeleccionado.nombreDestino;
@@ -236,7 +236,7 @@ function validarFechaTraslado(fechaInputId) {
 
     if (!fechaInput) return;
 
-    // ✅ Obtener la fecha de hoy en formato YYYY-MM-DD
+    // Obtener la fecha de hoy en formato YYYY-MM-DD
     let today = new Date();
     let todayStr = today.toISOString().split('T')[0];
 
@@ -248,12 +248,12 @@ function validarFechaTraslado(fechaInputId) {
 
 }
 
-// ✅ Ejecutar la validación al cargar la página
+// Ejecutar la validación al cargar la página
 document.addEventListener("DOMContentLoaded", function () {
     validarFechaTraslado("fechatraslado"); // Llamar la función para el campo del modal
 });
 
-// ✅ Función para mostrar alertas dinámicas (Bootstrap)
+// Función para mostrar alertas dinámicas (Bootstrap)
 function mostrarAlerta(mensaje, tipo = "success") {
     let alertContainer = document.getElementById("alertContainer");
 

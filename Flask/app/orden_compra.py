@@ -86,11 +86,11 @@ def add_ordenc():
         orden_compra_schema = {
             'id_ordenc': {
                 'type': 'string',
-                'regex': '^[a-zA-Z0-9\\-\\s]*$'  # Permitir solo letras, números y espacios
+                'regex': r'^[a-zA-Z0-9\-\s]*$'  # Permitir solo letras, números, guiones y espacios
             },
             'nombre_ordenc': {
                 'type': 'string',
-                'regex': '^[a-zA-Z0-9 ]*$'  # Permitir solo letras, números y espacios
+                'regex': r'^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]*$'  # Permitir solo letras, números, tildes y espacios
             },
             'nombre_tipoa': {
                 'type': 'string',
@@ -161,11 +161,11 @@ def update_ordenc(id):
             orden_compra_schema = {
                 'id_orden_compra': {
                     'type': 'string',
-                    'regex': '^[a-zA-Z0-9 -]*$'  # Permitir solo letras, números y espacios
+                    'regex': r'^[a-zA-Z0-9\-\s]*$'  # Permitir solo letras, números, guiones y espacios
                 },
                 'nombre_ordenc': {
                     'type': 'string',
-                    'regex': '^[a-zA-Z0-9 ]*$'  # Permitir solo letras, números y espacios
+                    'regex': r'^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]*$'  # Permitir solo letras, números, tildes y espacios
                 },
                 'nombre_tipo_adquisicion_ordenc': {
                     'type': 'string',

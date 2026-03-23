@@ -42,7 +42,7 @@ $(document).ready(function () {
     // Variable para almacenar temporalmente el estado que necesita confirmación
     let nuevoEstadoSeleccionadoPendiente = "";
 
-    // ✅ Listener para detectar cambios en el estado de la incidencia
+    // Listener para detectar cambios en el estado de la incidencia
     $("#edit_estadoIncidencia").on("change", function () {
         const estadoActual = $(this).val(); // El nuevo valor que el usuario seleccionó
         console.log(`Cambio detectado. Antes: "${estadoAntesDelCambio}", Ahora: "${estadoActual}"`);
@@ -64,7 +64,7 @@ $(document).ready(function () {
         }
     });
 
-    // ✅ Confirmar el cambio de estado desde el modal de confirmación
+    // Confirmar el cambio de estado desde el modal de confirmación
     $("#confirmStateBtn").on("click", function () {
         // El usuario ha confirmado el cambio al estado que estaba pendiente
         console.log("Confirmado cambio a:", nuevoEstadoSeleccionadoPendiente);
@@ -112,12 +112,12 @@ $(document).ready(function () {
         }
     });
 
-    // ✅ Función para limpiar datos (parece correcta)
+    // Función para limpiar datos (parece correcta)
     function limpiarDato(dato) {
         return dato ? dato.toString().trim() : "";
     }
 
-    // ✅ Evento para abrir el modal de añadir incidencia
+    // Evento para abrir el modal de añadir incidencia
     document.getElementById("form_add_incidencia").addEventListener("submit", function (event) {
         const selectedCheckbox = document.querySelector(".equipo-checkbox:checked");
         if (!selectedCheckbox) {

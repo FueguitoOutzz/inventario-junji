@@ -1,11 +1,11 @@
 function cargarEquipos(estado) {
     $.ajax({
-        url: `/mostrar_equipos_segun_tipo/${encodeURIComponent(estado)}`, // 🔹 Evita problemas con caracteres especiales
+        url: `/mostrar_equipos_segun_tipo/${encodeURIComponent(estado)}`, // Evita problemas con caracteres especiales
         method: "GET",
-        dataType: "json", // 🔹 Aseguramos que recibimos JSON
+        dataType: "json", // Aseguramos que recibimos JSON
         success: function (data) {
             let tbody = $("#detalleEquipos");
-            tbody.empty(); // 🔹 Limpiamos el contenido antes de agregar nuevos datos
+            tbody.empty(); // Limpiamos el contenido antes de agregar nuevos datos
 
             if (data.length === 0) {
                 tbody.append(`
@@ -13,7 +13,7 @@ function cargarEquipos(estado) {
                         <td colspan="4" class="text-center text-muted">No hay equipos en este estado</td>
                     </tr>
                 `);
-                return; // 🔹 No sigue ejecutando el código si no hay datos
+                return; // No sigue ejecutando el código si no hay datos
             }
 
             data.forEach(equipo => {
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentSortColumn = null; // Columna actualmente ordenada
     let currentSortOrder = "neutral"; // Estados: 'neutral', 'asc', 'desc'
 
-    // 🔹 Agregar iconos de ordenamiento dinámicamente a cada encabezado
+    // Agregar iconos de ordenamiento dinámicamente a cada encabezado
     sortableHeaders.forEach(header => {
 
 
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 🔹 Función para Ordenar la Tabla y Cambiar Íconos
+    // Función para Ordenar la Tabla y Cambiar Íconos
     function sortTable(columnIndex, headerElement) {
         const tableBody = document.getElementById("myTableBody");
         const rows = Array.from(tableBody.querySelectorAll("tr"));
@@ -106,11 +106,11 @@ document.addEventListener("DOMContentLoaded", function () {
         updateSortIcons(headerElement);
     }
 
-    // 🔹 Función para Actualizar Íconos de Ordenación
+    // Función para Actualizar Íconos de Ordenación
     function updateSortIcons(headerElement) {
         const allHeaders = document.querySelectorAll(".sortable-column");
 
-        // 🔹 Resetear las clases de todas las columnas
+        // Resetear las clases de todas las columnas
         allHeaders.forEach(header => {
             const upIcon = header.querySelector(".bi-caret-up, .bi-caret-up-fill");
             const downIcon = header.querySelector(".bi-caret-down, .bi-caret-down-fill");
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (downIcon) downIcon.className = "bi bi-caret-down d-none"; // Ocultar flecha descendente
         });
 
-        // 🔹 Actualizar las flechas en la columna actualmente ordenada
+        // Actualizar las flechas en la columna actualmente ordenada
         const upIcon = headerElement.querySelector(".bi-caret-up, .bi-caret-up-fill");
         const downIcon = headerElement.querySelector(".bi-caret-down, .bi-caret-down-fill");
 
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // 🔹 Función para convertir el valor de una celda para ordenamiento
+    // Función para convertir el valor de una celda para ordenamiento
     function parseCellValue(cellValue) {
         // Intentar convertir el valor a número, si falla, usar como string
         let parsed = parseFloat(cellValue.replace(/,/g, ""));

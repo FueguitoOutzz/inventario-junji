@@ -79,8 +79,8 @@
                 </td>
                 <td>
                     <a href="/edit_usuario/{{usuario.nombreUsuario}}" class="success-button">Editar</a>
-                    <a href="/delete_usuario/{{usuario.nombreUsuario}}"
-                        class="btn btn-danger delete-button">Eliminar</a>
+                    <button data-url="/delete_usuario/{{usuario.nombreUsuario}}"
+                        class="btn btn-danger delete-button">Eliminar</button>
                 </td>
             </tr>
             {% endfor %}

@@ -119,7 +119,7 @@ def update_marca_equipo(id):
             return redirect(url_for('marca_equipo.marcaEquipo'))
 
 # Funcion eliminar, para mantener la integridad de los datos, se muestra un mensaje al usuario para que confirme si desea eliminar la marca, si lo hace entonces borramos todas las dependencias de la marca
-@marca_equipo.route('/delete_marca_equipo/<ids>', methods=['GET'])
+@marca_equipo.route('/delete_marca_equipo/<ids>', methods=['POST'])
 @administrador_requerido
 def delete_marca_equipo(ids):
     try:
@@ -205,12 +205,18 @@ def delete_marca_equipo(ids):
             cur.execute("DELETE FROM marca_equipo WHERE idMarca_Equipo = %s", (marca_id,))
 
         mysql.connection.commit()
-        flash(f"Se eliminaron {len(id_list)} marca(s) y sus relaciones asociadas exitosamente.", 'success')
-        return redirect(url_for('marca_equipo.marcaEquipo'))
+        from flask import jsonify
+        return jsonify({
+            "status": "success",
+            "message": f"Se eliminaron {len(id_list)} marca(s) y sus relaciones asociadas exitosamente."
+        }), 200
     except Exception as e:
         mysql.connection.rollback()
-        flash(f"Error al eliminar la(s) marca(s): {str(e)}", 'danger')
-        return redirect(url_for('marca_equipo.marcaEquipo'))
+        from flask import jsonify
+        return jsonify({
+            "status": "error",
+            "message": f"Error al eliminar la(s) marca(s): {str(e)}"
+        }), 500
 
 
 

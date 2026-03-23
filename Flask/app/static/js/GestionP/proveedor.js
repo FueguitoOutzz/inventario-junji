@@ -71,13 +71,13 @@ $(document).ready(function () {
                 contentType: "application/json",
                 data: JSON.stringify({ ids: seleccionados }),
                 success: function (response) {
-                    console.log("✅ Respuesta del backend:", response);  // 🔍 Debug
+                    console.log("Respuesta del backend:", response);  // Debug
                     mostrarMensaje(response.message, "success");
                     setTimeout(() => location.reload(), 1500);
                 },
                 error: function (xhr) {
                     let errorMsg = xhr.responseJSON?.message || "Error al eliminar los proveedores.";
-                    console.error("❌ Error del backend:", xhr.responseJSON);  // 🔍 Debug
+                    console.error("Error del backend:", xhr.responseJSON);  // Debug
                     mostrarMensaje(errorMsg, "danger");
                 }
             });

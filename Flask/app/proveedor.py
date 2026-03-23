@@ -11,7 +11,7 @@ schema_proveedor = {
         'type': 'string',
         'minlength': 1,
         'maxlength': 100,
-        'regex': '^[a-zA-Z0-9 ]*$'  # Permitimos letras, números y espacios
+        'regex': r'^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$'  # Permitimos letras, números, tildes y espacios
     }
 }
 

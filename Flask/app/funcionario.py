@@ -198,7 +198,7 @@ def edit_funcionario():
         return redirect(url_for('funcionario.Funcionario'))
 
 #eliminar registro segun id
-@funcionario.route('/delete_funcionario/<id>', methods = ['POST', 'GET'])
+@funcionario.route('/delete_funcionario/<id>', methods=['POST'])
 @administrador_requerido
 def delete_funcionario(id):
     try:

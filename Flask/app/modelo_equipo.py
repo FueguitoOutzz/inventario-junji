@@ -14,7 +14,7 @@ schema = {
         'type': 'string',
         'minlength': 1,
         'maxlength': 45,
-        'regex': '^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]*$' # Permite solo letras, números y espacios
+        'regex': r'^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$' # Permite solo letras, números, tildes y espacios
     },
     'id_tipo_equipo': {
         'type':'integer',
@@ -296,7 +296,7 @@ def update_modelo_equipo(id):
                     "message": "Entrada inválida: Solo caracteres permitidos.",
                     "errors": v.errors,
                     "tipo_alerta": "warning"
-                }), 400  # ⛔ Retornar error 400 para manejo en el frontend
+                }), 400  # Retornar error 400 para manejo en el frontend
 
             cur = mysql.connection.cursor()
 
