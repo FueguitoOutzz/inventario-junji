@@ -6,7 +6,7 @@ venv
 .DS_Store
 #ignorar archivos pdf
 *.pdf
-
+*.env
 *.xlsx
 
 **/__pycache__/

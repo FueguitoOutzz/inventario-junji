@@ -58,10 +58,8 @@ def loguear():
         return redirect("/ingresar")
 
 @cuentas.route("/registrar", methods=["GET", "POST"])
+@administrador_requerido
 def registrar():
-    if session['privilegio'] != 1:
-        flash("no tiene los privilegios")
-        return redirect("/ingresar")
     cur = mysql.connection.cursor()
     cur.execute("""
     SELECT *

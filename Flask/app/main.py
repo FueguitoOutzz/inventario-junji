@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()  # Cargar variables desde .env
+
 from app import app
 # Se importan las variables blueprint en las vistas correspondientes para que puedan ser iniciadas a traves de main
 from proveedor import proveedor
@@ -32,4 +35,4 @@ app.register_blueprint(cuentas)
 
 # se inicia la aplicacion, y confirma que __name__ sea la aplicacion main y no un modulo
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=3300)
+    app.run(debug=True, host='127.0.0.1', port=3300)

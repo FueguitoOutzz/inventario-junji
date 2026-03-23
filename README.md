@@ -51,8 +51,8 @@ venv\Scripts\activate
 # En macOS/Linux:
 source venv/bin/activate
 
-# 3. Instalar todas las dependencias necesarias
-pip install -r requirements.txt
+# 3. Instalar todas las dependencias necesarias (desde la raíz del proyecto)
+pip install -r Flask/requirements.txt
 ```
 
 > **Nota:** Si realizas cambios o instalas una nueva librería, recuerda actualizar el archivo `requirements.txt` con el comando `pip freeze > requirements.txt`.
@@ -115,24 +115,24 @@ python main.py
 
 -----
 
-## 📂 Estructura del Proyecto (Lo escencial)
+## 📂 Estructura del Proyecto
 
-```
+```text
 .
 ├── Flask/
-│   └── app/              # Módulo principal de la aplicación Flask
-│       ├── __init__.py   # Inicializa la app y carga las variables de entorno
-│       ├── main.py       # Punto de entrada para ejecutar la aplicación
-│       ├── db.py         # Lógica de conexión a la base de datos
-│       ├── routes.py     # Define las rutas/endpoints de la aplicación
-│       ├── models.py     # Define los modelos de datos (si aplica)
-│       ├── static/       # Archivos estáticos (CSS, JS, imágenes)
-│       └── templates/    # Plantillas HTML (con Jinja2)
-├── venv/                 # Carpeta del entorno virtual (ignorada por Git)
-├── .env                  # Archivo de configuración local (ignorado por Git)
-├── .env.example          # Archivo de ejemplo para la configuración
-├── .gitignore            # Archivos y carpetas ignorados por Git
-├── requirements.txt      # Lista de dependencias de Python
+│   ├── app/              # Módulo principal de la aplicación Flask
+│   │   ├── app.py        # Inicializa la aplicación de Flask principal
+│   │   ├── main.py       # Punto de entrada para iniciar el servidor web
+│   │   ├── db.py         # Conexión a Base de Datos y configuración de Bcrypt
+│   │   ├── cuentas.py, equipo.py, proveedor.py... # Blueprints (Rutas y controladores de vistas)
+│   │   ├── utils.py      # Funciones utilitarias y auxiliares
+│   │   ├── static/       # Archivos estáticos (CSS, JS, imágenes, fuentes)
+│   │   └── templates/    # Plantillas HTML para renderizar las vistas (Jinja2)
+│   └── requirements.txt  # Lista de dependencias del proyecto de Flask (A instalar con pip)
+├── inventariofinal.sql   # Archivo vital: Respaldo de la BD (estructura y tablas obligatorias)
+├── SQL_historial/        # Scripts SQL e historial de importaciones
+├── Exel_import/          # Recursos para carga/procesamiento de planillas Excel
+├── venv/                 # Entorno virtual de Python (ignorado por Git)
 └── README.md             # Esta documentación
 ```
 
