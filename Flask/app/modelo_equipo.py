@@ -186,10 +186,12 @@ def add_modelo_equipo():
 
         except IntegrityError as e:
             error_message = str(e)
-            mensaje = "Error de duplicación en la base de datos."
+            mensaje = f"Error de duplicación en la base de datos: {error_message}"
             if "Duplicate entry" in error_message:
                 if "nombreModeloequipo" in error_message:
                     mensaje = "Error: Este modelo ya existe. Por favor, elija otro nombre."
+                else:
+                    mensaje = f"Error: La Base de Datos rechazó la inserción por duplicidad. Detalles: {error_message}"
             
             return jsonify({
                 "status": "error",
@@ -363,33 +365,36 @@ def delete_modelo_equipo():
             }), 400
 
         cur = mysql.connection.cursor()
+        
+        # Crear los marcadores de posición dinámicamente (%s, %s, ...)
+        format_strings = ','.join(['%s'] * len(id_list))
 
         # Eliminar dependencias en equipo_asignacion
-        cur.execute("""
+        cur.execute(f"""
             DELETE FROM equipo_asignacion 
             WHERE idEquipo IN (
-                SELECT idEquipo FROM equipo WHERE idModelo_equipo IN %s
+                SELECT idEquipo FROM equipo WHERE idModelo_equipo IN ({format_strings})
             )
-        """, (tuple(id_list),))
+        """, tuple(id_list))
 
         # Eliminar dependencias en traslacion
-        cur.execute("""
+        cur.execute(f"""
             DELETE FROM traslacion 
             WHERE idEquipo IN (
-                SELECT idEquipo FROM equipo WHERE idModelo_equipo IN %s
+                SELECT idEquipo FROM equipo WHERE idModelo_equipo IN ({format_strings})
             )
-        """, (tuple(id_list),))
+        """, tuple(id_list))
 
         # Eliminar dependencias en incidencia
-        cur.execute("""
+        cur.execute(f"""
             DELETE FROM incidencia 
             WHERE idEquipo IN (
-                SELECT idEquipo FROM equipo WHERE idModelo_equipo IN %s
+                SELECT idEquipo FROM equipo WHERE idModelo_equipo IN ({format_strings})
             )
-        """, (tuple(id_list),))
+        """, tuple(id_list))
 
         # Eliminar dependencias en devolucion
-        cur.execute("""
+        cur.execute(f"""
             DELETE FROM devolucion 
             WHERE idEquipoAsignacion IN (
                 SELECT idEquipoAsignacion
@@ -397,20 +402,20 @@ def delete_modelo_equipo():
                 WHERE idEquipo IN (
                     SELECT idEquipo
                     FROM equipo 
-                    WHERE idModelo_equipo IN (%s)
+                    WHERE idModelo_equipo IN ({format_strings})
                 )
             )
-        """, (tuple(id_list),))
+        """, tuple(id_list))
 
         # Eliminar equipos relacionados al modelo
-        cur.execute("""
-            DELETE FROM equipo WHERE idModelo_equipo IN %s
-        """, (tuple(id_list),))
+        cur.execute(f"""
+            DELETE FROM equipo WHERE idModelo_equipo IN ({format_strings})
+        """, tuple(id_list))
 
         # Eliminar los modelos seleccionados
-        cur.execute("""
-            DELETE FROM modelo_equipo WHERE idModelo_Equipo IN %s
-        """, (tuple(id_list),))
+        cur.execute(f"""
+            DELETE FROM modelo_equipo WHERE idModelo_Equipo IN ({format_strings})
+        """, tuple(id_list))
 
         mysql.connection.commit()
 

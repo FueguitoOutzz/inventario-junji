@@ -872,7 +872,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         );
       } else { // Fallback por si main.js o la función no carga
         if (confirm("¿Estás seguro de que deseas eliminar los equipos seleccionados?")) {
-          window.location.href = `/delete_equipo/${ids.join(",")}`;
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = `/delete_equipo/${ids.join(",")}`;
+          document.body.appendChild(form);
+          form.submit();
         }
       }
     });
