@@ -14,7 +14,7 @@ function buscarAsignaciones(page = 1) {
             })
             .then(data => {
                 actualizarTablaAsignaciones(data.asignaciones); // Actualizar la tabla con los datos recibidos
-                // actualizarPaginacion(data.total_pages, data.current_page, query); // Actualizar la paginación (comentado porque no está definida)
+                actualizarPaginacion(data.total_pages, data.current_page, query); // Actualizar la paginación
             })
             .catch(error => console.error("Error al buscar asignaciones:", error));
     }, 300); // Retraso de 300ms para evitar múltiples solicitudes
@@ -514,4 +514,62 @@ function abrirModalDetalleAsignacion(idAsignacion) {
         .catch(() => {
             document.getElementById('modalDetalleAsignacionBody').innerHTML = '<div class="text-danger">Error al cargar los datos.</div>';
         });
+}
+
+function actualizarPaginacion(totalPages, currentPage, query) {
+    const paginationUl = document.querySelector(".pagination");
+    if (!paginationUl) return;
+
+    let html = "";
+
+    // Botón Anterior
+    if (currentPage > 1) {
+        html += `<li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" onclick="buscarAsignaciones(${currentPage - 1})" aria-label="Anterior">
+                        <span aria-hidden="true">&laquo; Anterior</span>
+                    </a>
+                 </li>`;
+    }
+
+    // Primera página
+    html += `<li class="page-item ${currentPage === 1 ? 'active' : ''}">
+                <a class="page-link" href="javascript:void(0)" onclick="buscarAsignaciones(1)">1</a>
+             </li>`;
+
+    // Puntos suspensivos antes
+    if (currentPage > 4) {
+        html += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+    }
+
+    // Páginas cercanas
+    for (let p = currentPage - 2; p <= currentPage + 2; p++) {
+        if (p > 1 && p < totalPages) {
+            html += `<li class="page-item ${p === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="javascript:void(0)" onclick="buscarAsignaciones(${p})">${p}</a>
+                     </li>`;
+        }
+    }
+
+    // Puntos suspensivos después
+    if (currentPage < totalPages - 3) {
+        html += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+    }
+
+    // Última página
+    if (totalPages > 1) {
+        html += `<li class="page-item ${currentPage === totalPages ? 'active' : ''}">
+                    <a class="page-link" href="javascript:void(0)" onclick="buscarAsignaciones(${totalPages})">${totalPages}</a>
+                 </li>`;
+    }
+
+    // Botón Siguiente
+    if (currentPage < totalPages) {
+        html += `<li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" onclick="buscarAsignaciones(${currentPage + 1})" aria-label="Siguiente">
+                        <span aria-hidden="true">Siguiente &raquo;</span>
+                    </a>
+                 </li>`;
+    }
+
+    paginationUl.innerHTML = html;
 }

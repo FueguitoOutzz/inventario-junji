@@ -442,17 +442,21 @@
         <div class="d-flex flex-column flex-md-row">
             <!-- Sidebar -->
             <div class="sidebar bg-light p-1 col-md-2 col-12 d-none d-md-block">
-                <a href="/" class="d-flex align-items-center pb-3 mb-4 link-dark text-decoration-none border-bottom">
-                    <span class="fs-5 fw-semibold">Gestor de Inventario</span>
+                <a href="/" class="d-flex align-items-center pb-3 mb-4 link-dark text-decoration-none border-bottom sidebar-branding">
+                    <div class="brand-logo-container">
+                        <i class="bi bi-box-seam-fill brand-icon-stylish"></i>
+                    </div>
+                    <div class="brand-text-container ms-2">
+                        <span class="brand-title">Gestor de <span class="brand-highlight">Inventario</span></span>
+                    </div>
                 </a>
                 <ul class="list-unstyled ps-0 mt-5">
                     <li class="mb-4">
-                             
-                            <a href="/asignacion" 
-                                class="btn btn-toggle link-dark rounded text-decoration-none"
-                                data-bs-target="#asignacion">
-                                <i class="bi bi-laptop me-2"></i> <strong>Asignaciones</strong> 
-                            </a>
+
+                        <a href="/asignacion" class="btn btn-toggle link-dark rounded text-decoration-none"
+                            data-bs-target="#asignacion">
+                            <i class="bi bi-laptop me-2"></i> <strong>Asignaciones</strong>
+                        </a>
                     </li>
                     <li class="mb-4">
                         <button class="btn btn-toggle align-items-center rounded collapsed w-100 text-start"
@@ -542,17 +546,19 @@
                 </div>
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="mobileMenuLabel">Gestor de Inventario</h5>
+                        <h5 class="offcanvas-title d-flex align-items-center" id="mobileMenuLabel">
+                            <i class="bi bi-box-seam-fill me-2 text-success"></i>
+                            <span>Gestor de <strong class="text-success">Inventario</strong></span>
+                        </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
                         <ul class="list-unstyled ps-0" id="accordionSidebar">
                             <li class="mb-4">
-                                 <a href="/asignacion" 
-                                class="btn btn-toggle link-dark rounded text-decoration-none"
-                                data-bs-target="#asignacion">
-                                <i class="bi bi-laptop me-2"></i> <strong>Asignaciones</strong> 
-                            </a>
+                                <a href="/asignacion" class="btn btn-toggle link-dark rounded text-decoration-none"
+                                    data-bs-target="#asignacion">
+                                    <i class="bi bi-laptop me-2"></i> <strong>Asignaciones</strong>
+                                </a>
                             </li>
                             <li class="mb-4">
                                 <button class="btn btn-toggle align-items-center rounded collapsed w-100 text-start"
@@ -650,15 +656,27 @@
                     <div class="navbar-content">
                         <ul class="main-nav">
                             <li class="user-link">
-                                <a href="#">
+                                <a href="javascript:void(0)" class="user-link-toggle">
                                     <img src="static/img/account.png" alt="Profile" class="avatar img-fluid">
                                 </a>
                                 <div class="user-link-dropdown">
-                                    <span class="user-name">👤 {{ session['user'] }}</span>
-
-                                    <a href="/registrar" class="card">Administrar Usuarios</a>
-
-                                    <a href="/desloguear" class="card">Salir</a>
+                                    <div class="user-info-header">
+                                        <i class="bi bi-person-circle"></i>
+                                        <span class="user-name">{{ session['user'] }}</span>
+                                    </div>
+                                    <hr class="dropdown-divider">
+                                    <ul class="dropdown-menu-list">
+                                        <li>
+                                            <a href="/registrar">
+                                                <i class="bi bi-people-fill"></i> Administrar Usuarios
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/desloguear" class="logout-link">
+                                                <i class="bi bi-box-arrow-right"></i> Salir
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </li>
                         </ul>
@@ -741,6 +759,28 @@
         });
     </script>
 
+    <!-- Script para el menú de usuario (Click Toggle) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const userToggle = document.querySelector('.user-link-toggle');
+            const userDropdown = document.querySelector('.user-link-dropdown');
+
+            if (userToggle && userDropdown) {
+                userToggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    userDropdown.classList.toggle('show');
+                });
+
+                // Cerrar al hacer clic fuera
+                document.addEventListener('click', function (e) {
+                    if (!userDropdown.contains(e.target) && !userToggle.contains(e.target)) {
+                        userDropdown.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 <footer>
@@ -748,9 +788,9 @@
         <div class="copyright-text">
             <ul>
                 <li>
-                    <p>© Copyright 2024 by <strong>JUNJI</strong></p>
+                    <p>© Copyright 2026 by <strong>JUNJI</strong></p>
                 </li>
-                <li>version: 1.0</li>
+                <li>version: 4.0</li>
             </ul>
         </div>
         <ul class="social-icons">

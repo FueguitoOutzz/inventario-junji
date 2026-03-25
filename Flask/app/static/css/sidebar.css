@@ -91,4 +91,58 @@ main {
   content: none;
 } */
  .mt-5 {
-  margin-top: 7rem !important; /* Más espacio en la parte superior */}
+  margin-top: 7rem !important; /* Más espacio en la parte superior */
+}
+
+/* Attractive Branding Highlights */
+.sidebar-branding {
+    padding: 1.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.brand-logo-container {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #59ae87 0%, #458d6e 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(89, 174, 135, 0.3);
+}
+
+.brand-icon-stylish {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.brand-text-container {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.brand-title {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+    color: #2c3e50;
+}
+
+.brand-highlight {
+    color: #59ae87;
+    position: relative;
+}
+
+.brand-subtitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #95a5a6;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+.sidebar-branding:hover .brand-logo-container {
+    transform: scale(1.05) rotate(-5deg);
+    box-shadow: 0 6px 12px rgba(89, 174, 135, 0.4);
+}

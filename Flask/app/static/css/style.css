@@ -25,6 +25,7 @@ h2 {
     color: #3e4455;
     text-align: center;
 }
+
 h3 {
     color: #4e5462;
 }
@@ -45,6 +46,7 @@ body {
     flex-direction: column;
     background-color: #59ae87;
 }
+
 label {
     display: block;
 }
@@ -72,12 +74,18 @@ label {
 
 /* Dashboard Navbar */
 .btn-menu {
-    width: auto; /* Ajusta el ancho automáticamente al contenido */
-    padding: 0.5rem 1rem; /* Ajusta el relleno interno */
-    position: absolute; /* Asegura que no interfiera con otros elementos */
-    top: 30px; /* Ajusta la distancia desde la parte superior */
-    left: 20px; /* Ajusta la distancia desde la parte izquierda */
-    z-index: 1; /* Asegura que no se superponga con otros elementos */
+    width: auto;
+    /* Ajusta el ancho automáticamente al contenido */
+    padding: 0.5rem 1rem;
+    /* Ajusta el relleno interno */
+    position: absolute;
+    /* Asegura que no interfiera con otros elementos */
+    top: 30px;
+    /* Ajusta la distancia desde la parte superior */
+    left: 20px;
+    /* Ajusta la distancia desde la parte izquierda */
+    z-index: 1;
+    /* Asegura que no se superponga con otros elementos */
 }
 
 
@@ -88,22 +96,28 @@ label {
     padding: 1rem 1.5rem;
     background-color: transparent;
 }
+
 .dashboard-navbar::before {
     content: "";
-    position: absolute;;
+    position: absolute;
+    ;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-image: url('../img/header_full_2022.png'); /* Ruta de la imagen de fondo */
+    background-image: url('../img/header_full_2022.png');
+    /* Ruta de la imagen de fondo */
     background-size: cover;
     background-position: center;
-    opacity: 0.9; /
+    opacity: 0.9;/
 }
+
 .dashboard-navbar .navbar-header {
-    position: relative; /* Ajustar la posición a relativa para permitir que otros elementos floten sobre ella */
-    z-index: 1; /* Asegura que los elementos floten sobre la imagen de fondo */
+    position: relative;
+    /* Ajustar la posición a relativa para permitir que otros elementos floten sobre ella */
+    z-index: 1;
+    /* Asegura que los elementos floten sobre la imagen de fondo */
 }
 
 
@@ -112,17 +126,21 @@ label {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: -1; /* La imagen de encabezado estará detrás del contenido de la barra de navegación */
+    z-index: -1;
+    /* La imagen de encabezado estará detrás del contenido de la barra de navegación */
 }
 
 .dashboard-navbar form {
-    display: flex; /* Asegura que el formulario sea visible */
-    margin-right: auto; /* Mueve el formulario hacia la izquierda */
+    display: flex;
+    /* Asegura que el formulario sea visible */
+    margin-right: auto;
+    /* Mueve el formulario hacia la izquierda */
 }
 
 .dashboard-navbar .nav-search {
     display: flex;
-    align-items: center; /* Centra los elementos verticalmente */
+    align-items: center;
+    /* Centra los elementos verticalmente */
 }
 
 .dashboard-navbar .navbar-content {
@@ -146,37 +164,92 @@ label {
 
 .user-link-dropdown {
     display: none;
-}
-
-.user-link:hover .user-link-dropdown {
     position: absolute;
     right: 0;
-    left: auto;
-    min-width: 10rem;
-    background-color: #FFF;
-    display: block;
-    border: 1px solid #d2d2d2;
-    box-shadow: 0 .1rem .2rem rgba(255, 255, 255, .075);
-    animation: fade .5s;
+    top: 100%;
+    margin-top: 10px;
+    background-color: #ffffff;
+    min-width: 220px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    overflow: hidden;
+    animation: slideDown .3s ease-out;
 }
 
-@keyframes fade {
-    0% {
+@keyframes slideDown {
+    from {
         opacity: 0;
+        transform: translateY(-10px);
     }
 
-    100% {
+    to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.user-link-dropdown a {
+.user-link-dropdown.show {
     display: block;
-    width: 100%;
-    color: #495057;
-    padding: 0 0.75rem;
+}
+
+.user-info-header {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f8f9fa;
+}
+
+.user-info-header i {
+    font-size: 1.25rem;
+    color: #59ae87;
+}
+
+.user-info-header .user-name {
     font-size: 1rem;
-    margin-top: 0.75rem;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-divider {
+    margin: 0;
+    opacity: 0.1;
+}
+
+.dropdown-menu-list {
+    padding: 10px 0;
+    margin: 0;
+}
+
+.dropdown-menu-list li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: #495057;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu-list li a:hover {
+    background-color: #f0f7f4;
+    color: #59ae87;
+}
+
+.dropdown-menu-list li a i {
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+.dropdown-menu-list li a.logout-link:hover {
+    background-color: #fff5f5;
+    color: #dc3545;
 }
 
 
@@ -202,11 +275,13 @@ label {
     transition: .4s;
     cursor: pointer;
 }
+
 /* Estilos del formulario */
 .mi-formulario {
     max-width: 400px;
     margin: 0 auto;
 }
+
 .title {
     font-size: 1.25rem;
     font-weight: 600;
@@ -240,10 +315,14 @@ label {
 .custom-alert {
     padding: 15px;
     margin-bottom: 20px;
-    border: 1px solid #4CAF50; /* Color del borde de la alerta de éxito */
-    border-radius: 4px; /* Bordes redondeados */
-    background-color: #4CAF50; /* Color de fondo de la alerta de éxito */
-    color: #fff; /* Color del texto de la alerta */
+    border: 1px solid #4CAF50;
+    /* Color del borde de la alerta de éxito */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    background-color: #4CAF50;
+    /* Color de fondo de la alerta de éxito */
+    color: #fff;
+    /* Color del texto de la alerta */
     position: relative;
 }
 
@@ -256,34 +335,42 @@ label {
     cursor: pointer;
     background: none;
     border: none;
-    color: #fff; /* Color del texto del botón de cierre */
+    color: #fff;
+    /* Color del texto del botón de cierre */
 }
 
 /* Cambiar el cursor al pasar el ratón por encima del botón de cierre */
 .close:hover {
-    background-color: rgba(255, 255, 255, 0.3); /* Color de fondo al pasar el ratón por encima */
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Color de fondo al pasar el ratón por encima */
 }
+
 /*------------ Table Layout ------------*/
 .table-container {
-    margin: 20px; /* Centrar el contenedor horizontalmente y agregar margen */
-    width: 100%; /* Ancho del contenedor */
+    margin: 20px;
+    /* Centrar el contenedor horizontalmente y agregar margen */
+    width: 100%;
+    /* Ancho del contenedor */
 }
 
 .length-selector {
-    margin-right: auto; /* Alinear a la izquierda */
-  }
-  
-  .datatable-search {
-    text-align: center; /* Centrar buscador */
-  }
-  
-  .actions-button {
-    margin-left: auto; /* Alinear a la derecha */
-  }
-  
-  #action-select {
+    margin-right: auto;
+    /* Alinear a la izquierda */
+}
+
+.datatable-search {
+    text-align: center;
+    /* Centrar buscador */
+}
+
+.actions-button {
+    margin-left: auto;
+    /* Alinear a la derecha */
+}
+
+#action-select {
     min-width: 150px;
-  }
+}
 
 #posts {
     border-collapse: collapse;
@@ -305,50 +392,64 @@ label {
 #posts tbody tr:nth-of-type(2n) {
     background-color: #f5f5f5;
 }
+
 /*boton informacion*/
 .info-button {
     display: inline-block;
     padding: 5px 15px;
     font-size: 15px;
-   /* font-weight: bold; */
+    /* font-weight: bold; */
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    border: solid #0000ff; /* Color del borde del éxito en Bootstrap */
-    color: #fff; /* Color del texto */
-    background-color: #0000ff; /* Color de fondo del éxito en Bootstrap */
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transiciones suaves */
+    border: solid #0000ff;
+    /* Color del borde del éxito en Bootstrap */
+    color: #fff;
+    /* Color del texto */
+    background-color: #0000ff;
+    /* Color de fondo del éxito en Bootstrap */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    /* Transiciones suaves */
 }
+
 .nav-button {
     display: inline-block;
     padding: 5px 15px;
     font-size: 15px;
     margin: 15px;
-   /* font-weight: bold; */
+    /* font-weight: bold; */
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    border: solid #008800; 
-    color: #fff; /* Color del texto */
-    background-color: #009900; 
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transiciones suaves */
+    border: solid #008800;
+    color: #fff;
+    /* Color del texto */
+    background-color: #009900;
+    border-radius: 5px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    /* Transiciones suaves */
 }
+
 .nav-button2 {
     display: inline-block;
     padding: 5px 15px;
     font-size: 15px;
     margin: 1px;
-   /* font-weight: bold; */
+    /* font-weight: bold; */
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    border: solid #008800; 
-    color: #fff; /* Color del texto */
-    background-color: #009900; 
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transiciones suaves */
+    border: solid #008800;
+    color: #fff;
+    /* Color del texto */
+    background-color: #009900;
+    border-radius: 5px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    /* Transiciones suaves */
 }
 
 
@@ -357,21 +458,28 @@ label {
     display: inline-block;
     padding: 5px 15px;
     font-size: 15px;
-   /* font-weight: bold; */
+    /* font-weight: bold; */
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    border: solid #fcbd18; /* Color del borde del éxito en Bootstrap */
-    color: #fff; /* Color del texto */
-    background-color: #fcbd18; /* Color de fondo del éxito en Bootstrap */
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transiciones suaves */
+    border: solid #fcbd18;
+    /* Color del borde del éxito en Bootstrap */
+    color: #fff;
+    /* Color del texto */
+    background-color: #fcbd18;
+    /* Color de fondo del éxito en Bootstrap */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    /* Transiciones suaves */
 }
 
 /* Estilo del botón de éxito al pasar el ratón por encima */
 .success-button:hover {
-    background-color: #fcc741; /* Nuevo color de fondo al pasar el ratón */
-    border-color: #fcc741; /* Nuevo color del borde al pasar el ratón */
+    background-color: #fcc741;
+    /* Nuevo color de fondo al pasar el ratón */
+    border-color: #fcc741;
+    /* Nuevo color del borde al pasar el ratón */
 }
 
 .agregar-button {
@@ -382,17 +490,24 @@ label {
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    border: solid #495057; /* Color del borde del éxito en Bootstrap */
-    color: #fff; /* Color del texto */
-    background-color: #495057; /* Color de fondo del éxito en Bootstrap */
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transiciones suaves */
+    border: solid #495057;
+    /* Color del borde del éxito en Bootstrap */
+    color: #fff;
+    /* Color del texto */
+    background-color: #495057;
+    /* Color de fondo del éxito en Bootstrap */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    /* Transiciones suaves */
 }
 
 /* Estilo del botón de éxito al pasar el ratón por encima */
 .agregar-button:hover {
-    background-color: #555c63; /* Nuevo color de fondo al pasar el ratón */
-    border-color: #555c63; /* Nuevo color del borde al pasar el ratón */
+    background-color: #555c63;
+    /* Nuevo color de fondo al pasar el ratón */
+    border-color: #555c63;
+    /* Nuevo color del borde al pasar el ratón */
 }
 
 /* Footer */
@@ -443,6 +558,7 @@ label {
         margin: auto;
         outline: none;
     }
+
     .search-query {
         margin: auto;
     }
@@ -481,13 +597,15 @@ label {
     .social-icons li a {
         color: #000;
     }
-    body, html {
+
+    body,
+    html {
         margin: 0;
         padding: 0;
         width: 100%;
     }
-    
-    
+
+
     .main {
         display: flex;
         flex-direction: column;
@@ -510,15 +628,16 @@ label {
     font-size: 16px;
     border: none;
     cursor: pointer;
-  }
-  
-  /* Dropdown button on hover & focus */
-  .dropbtn:hover, .dropbtn:focus {
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
     background-color: #3e8e41;
-  }
-  
-  /* The search field */
-  #myInput {
+}
+
+/* The search field */
+#myInput {
     box-sizing: border-box;
     background-image: url('searchicon.png');
     background-position: 14px 12px;
@@ -527,52 +646,61 @@ label {
     padding: 14px 20px 12px 45px;
     border: none;
     border-bottom: 1px solid #ddd;
-  }
-  
-  /* The search field when it gets focus/clicked on */
-  #myInput:focus {outline: 3px solid #ddd;}
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
+}
+
+/* The search field when it gets focus/clicked on */
+#myInput:focus {
+    outline: 3px solid #ddd;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f6f6f6;
     min-width: 230px;
     border: 1px solid #ddd;
     z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #f1f1f1}
-  
-  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-  .show {display:block;}
-  .main-ul {
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display: block;
+}
+
+.main-ul {
     width: 85px;
     min-width: 85px;
     padding: 25px 0;
     flex: 1 1 auto;
 }
+
 .main-ul-item {
     color: #000;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    
+
 }
+
 a.mainbar-link {
     padding: 1.625rem 3.625rem;
     color: #FFF;
@@ -586,34 +714,43 @@ a.mainbar-link {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
+
 .dropdown-options {
     z-index: 100;
     display: none;
     position: absolute;
     overflow: auto;
-  }
-  .dropdown:hover .dropdown-options {
+}
+
+.dropdown:hover .dropdown-options {
     display: block;
-  }
+}
+
 .options-button {
     display: inline-block;
     padding: 5px 15px;
     font-size: 15px;
-   /* font-weight: bold; */
+    /* font-weight: bold; */
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    border: solid #5500ff; /* Color del borde del éxito en Bootstrap */
-    color: #fff; /* Color del texto */
-    background-color: #5500ff; /* Color de fondo del éxito en Bootstrap */
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transiciones suaves */
+    border: solid #5500ff;
+    /* Color del borde del éxito en Bootstrap */
+    color: #fff;
+    /* Color del texto */
+    background-color: #5500ff;
+    /* Color de fondo del éxito en Bootstrap */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    /* Transiciones suaves */
 }
 
 .desplegable-button {
-    width: 100%; 
-    border-radius:0px;
+    width: 100%;
+    border-radius: 0px;
 }
+
 .search-box {
     font-size: 1rem;
     text-align: center;
@@ -623,23 +760,36 @@ a.mainbar-link {
     min-width: 180px;
     width: 100%;
 }
+
 .search-box:focus {
     outline: none;
 }
 
 .error-message {
-    color: white; /* Cambiamos el color del texto a blanco para mejor contraste */
-    background-color: red; /* Fondo rojo para el mensaje de error */
-    border: 1px solid darkred; /* Borde más oscuro para definir el área */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 10px; /* Espaciado interno */
-    margin: 10px 0; /* Margen superior e inferior */
-    display: none; /* Inicialmente oculto */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
-    font-family: Arial, sans-serif; /* Fuente más legible */
-    font-size: 14px; /* Tamaño de fuente */
-    text-align: center; /* Centrar el texto */
+    color: white;
+    /* Cambiamos el color del texto a blanco para mejor contraste */
+    background-color: red;
+    /* Fondo rojo para el mensaje de error */
+    border: 1px solid darkred;
+    /* Borde más oscuro para definir el área */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    padding: 10px;
+    /* Espaciado interno */
+    margin: 10px 0;
+    /* Margen superior e inferior */
+    display: none;
+    /* Inicialmente oculto */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* Sombra para dar profundidad */
+    font-family: Arial, sans-serif;
+    /* Fuente más legible */
+    font-size: 14px;
+    /* Tamaño de fuente */
+    text-align: center;
+    /* Centrar el texto */
 }
+
 .text-error-message {
     color: red;
     font-size: 13px;
@@ -654,6 +804,7 @@ svg.bi {
     display: flex;
     align-items: center;
 }
+
 .container-alert-error button {
     width: 5px;
     height: 5px;
@@ -679,7 +830,8 @@ svg.bi {
     opacity: 0;
 }
 
-.valid, .invalid {
+.valid,
+.invalid {
     font-size: 14px;
 }
 
@@ -719,6 +871,7 @@ svg.bi {
     opacity: 0.5;
     pointer-events: none;
 }
+
 .button-info {
     background-color: #0056b3;
     border-color: #0056b3;
@@ -731,6 +884,7 @@ svg.bi {
     border-color: #003d7a;
     color: #d9d9d9;
 }
+
 #container-buttons-equipo .edit-button,
 #container-buttons-equipo .delete-button {
     transition: opacity 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
@@ -757,15 +911,16 @@ svg.bi {
 
 /* Estilos para que el mensaje de error no provoque que el modal o contenido se agrande verticalmente */
 .mb-3 {
-  position: relative;
+    position: relative;
 }
 
 .mb-3 .text-error-message {
-  position: absolute;
-  top: 100%;
+    position: absolute;
+    top: 100%;
 }
 
-.table td, .table th {
+.table td,
+.table th {
     vertical-align: middle;
 }
 
@@ -774,9 +929,11 @@ svg.bi {
     justify-content: space-between;
     width: 100%;
 }
+
 .toolbar-1 {
     justify-content: flex-start;
 }
+
 .toolbar-2 {
     flex: 2;
     display: flex;
@@ -786,11 +943,14 @@ svg.bi {
 .toolbar-3 {
     justify-content: flex-end;
 }
-.toolbar-1, .toolbar-3 {
+
+.toolbar-1,
+.toolbar-3 {
     flex: 1;
     display: flex;
     gap: 0.5rem;
 }
+
 /* Aplica el cursor pointer solo a las filas de la tabla con id "tablaEquipo" */
 #tablaEquipo tbody tr {
     cursor: pointer;
@@ -799,30 +959,39 @@ svg.bi {
 /* Estilos específicos para la barra de herramientas en orden_compra.html */
 .orden-compra-toolbar {
     display: flex;
-    justify-content: center; /* Centra todos los elementos horizontalmente */
-    align-items: center; /* Centra todos los elementos verticalmente */
-    gap: 1rem; /* Espaciado entre los elementos */
+    justify-content: center;
+    /* Centra todos los elementos horizontalmente */
+    align-items: center;
+    /* Centra todos los elementos verticalmente */
+    gap: 1rem;
+    /* Espaciado entre los elementos */
     width: 100%;
-    margin: 20px 0; /* Espaciado superior e inferior */
+    margin: 20px 0;
+    /* Espaciado superior e inferior */
 }
 
 .orden-compra-toolbar-1,
 .orden-compra-toolbar-3 {
-    flex: 1; /* Ocupan el mismo espacio */
+    flex: 1;
+    /* Ocupan el mismo espacio */
     display: flex;
-    justify-content: flex-start; /* Alinea a la izquierda */
+    justify-content: flex-start;
+    /* Alinea a la izquierda */
 }
 
 .orden-compra-toolbar-3 {
-    justify-content: flex-end; /* Alinea a la derecha */
+    justify-content: flex-end;
+    /* Alinea a la derecha */
 }
 
 .orden-compra-toolbar-2 {
-    flex: 2; /* Ocupa más espacio que los otros elementos */
+    flex: 2;
+    /* Ocupa más espacio que los otros elementos */
     display: flex;
-    justify-content: center; /* Centra el campo de búsqueda */
+    justify-content: center;
+    /* Centra el campo de búsqueda */
     max-width: 100%;
-    
+
 }
 
 .orden-compra-search-box {
@@ -830,59 +999,74 @@ svg.bi {
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 500px; /* Ancho fijo */
-    max-width: 100%; /* Asegura que no exceda el contenedor */
-    padding: 5px 10px; /* Espaciado interno */
+    width: 500px;
+    /* Ancho fijo */
+    max-width: 100%;
+    /* Asegura que no exceda el contenedor */
+    padding: 5px 10px;
+    /* Espaciado interno */
 }
 
 /* Estilos para el contenedor del buscador de DataTables */
 .dt-search {
-  margin-bottom: 1rem; /* Añade espacio debajo si lo deseas */
-  /* Puedes añadir float: none; text-align: right; si quieres alinearlo diferente */
+    margin-bottom: 1rem;
+    /* Añade espacio debajo si lo deseas */
+    /* Puedes añadir float: none; text-align: right; si quieres alinearlo diferente */
 }
 
 /* Estilos para la etiqueta ("Search:") dentro del contenedor */
 .dt-search label {
-  margin-right: 0.5em; /* Espacio entre la etiqueta y el input */
-  font-weight: normal; /* O bold si prefieres */
+    margin-right: 0.5em;
+    /* Espacio entre la etiqueta y el input */
+    font-weight: normal;
+    /* O bold si prefieres */
 }
 
 /* Estilos para el input de búsqueda dentro del contenedor */
-.dt-search input[type="search"].form-control { 
-  /* Ya tiene form-control y form-control-sm, así que solo necesitas añadir o sobrescribir */
-  border: 1px solid #ced4da; /* Asegura un borde por defecto */
-  border-radius: 0.25rem; /* Bordes redondeados estándar de Bootstrap */
-  padding: 0.25rem 0.5rem; /* Padding estándar de form-control-sm */
-  width: auto; /* Permite que el input tome un ancho natural o definido */
-  min-width: 200px; /* Un ancho mínimo para que no sea demasiado pequeño */
-  display: inline-block; /* Para que respete el ancho 'auto' y se alinee con la etiqueta */
-  vertical-align: middle; /* Alineación vertical con la etiqueta */
+.dt-search input[type="search"].form-control {
+    /* Ya tiene form-control y form-control-sm, así que solo necesitas añadir o sobrescribir */
+    border: 1px solid #ced4da;
+    /* Asegura un borde por defecto */
+    border-radius: 0.25rem;
+    /* Bordes redondeados estándar de Bootstrap */
+    padding: 0.25rem 0.5rem;
+    /* Padding estándar de form-control-sm */
+    width: auto;
+    /* Permite que el input tome un ancho natural o definido */
+    min-width: 200px;
+    /* Un ancho mínimo para que no sea demasiado pequeño */
+    display: inline-block;
+    /* Para que respete el ancho 'auto' y se alinee con la etiqueta */
+    vertical-align: middle;
+    /* Alineación vertical con la etiqueta */
 }
 
 /* Estilos para el input cuando tiene el foco */
 .dt-search input[type="search"].form-control:focus {
-  border-color: #86b7fe; /* Color de foco de Bootstrap */
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Sombra de foco de Bootstrap */
+    border-color: #86b7fe;
+    /* Color de foco de Bootstrap */
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    /* Sombra de foco de Bootstrap */
 }
 
 /* Si quieres ocultar la etiqueta "Search:" por completo */
-.dt-search label { 
-display: none; 
+.dt-search label {
+    display: none;
 
-} 
+}
 
 .accordion-button::after {
-  background-image: initial;
-  width: 0;
+    background-image: initial;
+    width: 0;
 }
 
 .accordion-button:not(.collapsed)::after {
-  background-image: initial;
-  width: 0;
+    background-image: initial;
+    width: 0;
 }
 
 .accordion-button:hover {
-  background-color: #afd2f542;
+    background-color: #afd2f542;
 }
 
 #agregarObservacion {
